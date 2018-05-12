@@ -31,7 +31,7 @@ class App extends Component {
   /* Return a list of book titles from a list of books */
   mapTitles(books) {
     return books.map((book) => {
-      return book.title;
+      return (!!book.title) ? book.title.toLocaleLowerCase() : "";
     });
   }
 

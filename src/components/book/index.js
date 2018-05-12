@@ -76,12 +76,15 @@ class Book extends Component {
     });
   }
 
+  /* Hides book and uses parent function to delete it from state */
   deleteBook() {
     const { deleteFromArray, item } = this.props;
     var del = window.confirm("Are you sure you want to delete this book?");
     if( del === true ) {
       this.setState({deleteItem: true},() => {
-        deleteFromArray(item);
+        if(!!deleteFromArray) {
+          deleteFromArray(item);
+        }
       });
     }
   }
