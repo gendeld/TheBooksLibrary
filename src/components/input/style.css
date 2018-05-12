@@ -9,9 +9,11 @@
 
 .error {
   position: absolute;
-  right: 13%;
+  right: 15%;
   color: rgb(147, 147, 147);
   font-size: 0.75em;
+  width: 45%;
+  text-align: right;
 }
 
 input {

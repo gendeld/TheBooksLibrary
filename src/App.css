@@ -3,6 +3,13 @@
 
 * {
   transition: 300ms;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
 }
 
 body {
@@ -33,4 +40,11 @@ body {
   font-family: 'Lobster', cursive;
   line-height: 0.9;
   text-shadow: 2px 2px 0px rgba(150, 150, 150, .5);
+}
+
+@media (max-width: 767px) {
+  #logo {
+    font-size: 5em;
+    padding: 50px 5vw 0;
+  }
 }

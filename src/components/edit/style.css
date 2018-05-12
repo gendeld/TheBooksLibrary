@@ -80,3 +80,10 @@
 .invalid-book {
   background-color: rgb(147, 147, 147)!important;
 }
+
+@media (max-width: 767px) {
+  .add-form {
+    min-width: 0;
+    width: 80%;
+  }
+}

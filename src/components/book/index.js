@@ -3,8 +3,9 @@ import Cover from '../cover';
 import Edit from '../edit';
 import './style.css';
 
-const imagesPrefix = "http://127.0.0.1:8080/"
+const imagesPrefix = "http://127.0.0.1:8080/";
 
+/* Book view */
 class Book extends Component {
   constructor(props) {
     super(props);
@@ -23,6 +24,8 @@ class Book extends Component {
     );
   }
 
+  /* Corrects capitalization and removes unwanted characters from a book's title
+    "@@THIS is a BooK!!" -> "This Is A Book" */
   formatTitle(title) {
     if(!!title) {
       var words = title.split(" ");
@@ -39,6 +42,7 @@ class Book extends Component {
     return "";
   }
 
+  /* Adds prefix to background image string */
   coverBackground(background) {
     if(!!background) {
       return `${imagesPrefix}${background}`;
@@ -46,12 +50,14 @@ class Book extends Component {
     return `${imagesPrefix}images/book-cover_template.jpg`;
   }
 
+  /* Submit editted book to state */
   submitBook(book) {
     const { title, author, date } = book;
     this.setState({ title, author, date });
     this.editToggle();
   }
 
+  /* Toggle editing view on and off */
   editToggle() {
     const { isEditing } = this.state;
     this.setState({isEditing: !isEditing});
@@ -65,6 +71,7 @@ class Book extends Component {
     if(!!title&&!!author&&!!date) {
       newBook = {title, author, date};
     }
+    /* If edited book has been submited to state, load book info from state, otherwise from props */
     return (
       <div className="book">
         <Cover background={this.coverBackground(item.imageLink)} link={`${item.link}`} />

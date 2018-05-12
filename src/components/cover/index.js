@@ -2,8 +2,7 @@ import React, { PureComponent } from 'react';
 
 import './style.css';
 
-const imagesPrefix = "http://127.0.0.1:8080/"
-
+/* Cover photo for books */
 class Cover extends PureComponent {
   render() {
     const { background, link } = this.props;

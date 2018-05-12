@@ -32,7 +32,6 @@ class Edit extends Component {
 
   /* Change handler that receives event and attribute and sets the state attribute to the event's value */
   inputChange(event, attr) {
-    console.warn(event);
     var ob = {};
     if(!!event&&!!event.target&&event.target.value) {
       ob[attr] = event.target.value;
@@ -142,6 +141,7 @@ class Edit extends Component {
     });
   }
 
+  /* Renders add, submit, and cancel buttons */
   renderButtons(titleValid,authorValid,dateValid) {
     const { submitBook, cancelEdit, isForAdd } = this.props;
     const { isActive, title, author, date } = this.state;
@@ -191,6 +191,7 @@ class Edit extends Component {
           onClick={() => {
             this.clearAll();
             if(!!cancelEdit) {
+              /* Callback received from parent */
               cancelEdit();
             }
           }}
@@ -204,6 +205,8 @@ class Edit extends Component {
     );
   }
 
+  /* Transforms year to date
+    "2017" -> "2017-01-01" */
   yearToDate(year) {
     if(!!year) {
       return year+"-01-01";

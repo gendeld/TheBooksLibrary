@@ -12,13 +12,15 @@ class Input extends Component {
     super(props);
     this.state = {
       everChanged: false,
-      pressed: false
+      pressed: false,
+      hover: false
     };
   }
 
   shouldComponentUpdate(nextProps,nextState) {
     return nextState.everChanged!==this.state.everChanged||
     nextState.pressed!==this.state.pressed||
+    nextState.hover!==this.state.hover||
     nextProps.placeholder!==this.props.placeholder||
     nextProps.type!==this.props.type||
     nextProps.attr!==this.props.attr||
@@ -38,15 +40,27 @@ class Input extends Component {
     this.input.value = "";
     this.setState({
       everChanged: false,
-      pressed: false
+      pressed: false,
+      hover: false
     });
   }
 
   render() {
     const { initialValue, inputChange, placeholder, type, attr, validator } = this.props;
-    const { everChanged, pressed } = this.state;
+    const { everChanged, pressed, hover } = this.state;
     return (
-      <div class="inputContainer">
+      <div class="inputContainer"
+        onMouseOver={() => {
+          if(hover===false) {
+            this.setState({hover: true});
+          }
+        }}
+        onMouseLeave={() => {
+          if(hover===true) {
+            this.setState({hover: false});
+          }
+        }}
+      >
         <input defaultValue={initialValue} ref={el => this.input = el} style={{borderColor: this.inputBorderColor()}} type={type} placeholder={placeholder}
           onChange={(event) => {
             /* Mark that the input has changes */
@@ -71,7 +85,7 @@ class Input extends Component {
         />
         {
           (everChanged===true&&validator.isValid===false) &&
-          <div style={{marginRight: (pressed===true&&type==="date") ? 55 : 0}} className="error">
+          <div style={{paddingLeft: ((pressed===true||hover===true)&&type==="date") ? '15%' : 0, marginRight: ((pressed===true||hover===true)&&type==="date") ? 55 : 0}} className="error">
             {validator.text}
           </div>
         }
