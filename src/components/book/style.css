@@ -91,3 +91,7 @@ h6 {
 .edit-form-tranform {
   transform: translateY(499px);
 }
+
+.on-top {
+  z-index: 3;
+}

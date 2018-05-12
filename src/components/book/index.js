@@ -13,7 +13,8 @@ class Book extends Component {
       title: null,
       author: null,
       date: null,
-      isEditing: false
+      isEditing: false,
+      isDoneEditing: true
     };
   }
 
@@ -59,13 +60,24 @@ class Book extends Component {
 
   /* Toggle editing view on and off */
   editToggle() {
-    const { isEditing } = this.state;
-    this.setState({isEditing: !isEditing});
+    var $this=this;
+    const { isEditing, isDoneEditing } = this.state;
+    var ob = {isEditing: !isEditing};
+    if(isEditing===false) {
+      ob.isDoneEditing = false;
+    }
+    this.setState(ob,() => {
+      if(isEditing===true) {
+        setTimeout(() => {
+          $this.setState({isDoneEditing: !isDoneEditing});
+        }, 600);
+      }
+    });
   }
 
   render() {
     const { item } = this.props;
-    const { title, author, date, isEditing } = this.state;
+    const { title, author, date, isEditing, isDoneEditing } = this.state;
     /* Post-edit book */
     var newBook = null;
     if(!!title&&!!author&&!!date) {
@@ -95,7 +107,7 @@ class Book extends Component {
             <img src={`${imagesPrefix}images/close.png`} />
           </div>
         </div>
-        <div className="edit-form-container">
+        <div className={`edit-form-container ${isDoneEditing===true ? "" : "on-top"}`}>
           <div className={`edit-form-inner ${isEditing===true ? "" : "edit-form-tranform"}`}>
           {
             isEditing &&
