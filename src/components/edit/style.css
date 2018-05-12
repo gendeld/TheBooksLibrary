@@ -1,0 +1,82 @@
+* {
+  transition: 300ms;
+}
+
+.buttons {
+  padding-top: 0px;
+  margin: 60px auto;
+}
+
+.no-show {
+  opacity: 0;
+}
+
+.no-height {
+  height: 0!important;
+  padding: 0!important;
+  margin-top: 0!important;
+  margin-bottom: 0!important;
+}
+
+.libraryButton {
+  color: white;
+  position: relative;
+  margin: 20px auto;
+  text-align: center;
+  padding: 15px;
+  border-radius: 20px;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.libraryButton > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.libraryButton img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.cancel {
+  background-color: rgb(214, 83, 70);
+}
+
+.add-book, .book-form {
+  background-color: rgba(237, 120, 74,1);
+}
+
+.add-book:hover {
+  background-color: rgba(237, 109, 58, 0.8);
+}
+
+.book-form {
+  overflow: hidden;
+}
+
+.add-form {
+  min-width: 500px;
+  width: 35%;
+  margin: 70px auto;
+  height: 282px;
+  border-radius: 40px;
+}
+
+.valid-book {
+  background-color: rgb(70, 214, 119)!important;
+}
+
+.invalid-book {
+  background-color: rgb(147, 147, 147)!important;
+}
