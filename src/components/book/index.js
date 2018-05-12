@@ -14,7 +14,8 @@ class Book extends Component {
       author: null,
       date: null,
       isEditing: false,
-      isDoneEditing: true
+      isDoneEditing: true,
+      deleteItem: false
     };
   }
 
@@ -75,9 +76,19 @@ class Book extends Component {
     });
   }
 
+  deleteBook() {
+    const { deleteFromArray, item } = this.props;
+    var del = window.confirm("Are you sure you want to delete this book?");
+    if( del === true ) {
+      this.setState({deleteItem: true},() => {
+        deleteFromArray(item);
+      });
+    }
+  }
+
   render() {
-    const { item } = this.props;
-    const { title, author, date, isEditing, isDoneEditing } = this.state;
+    const { item, bookTitles } = this.props;
+    const { title, author, date, isEditing, isDoneEditing, deleteItem } = this.state;
     /* Post-edit book */
     var newBook = null;
     if(!!title&&!!author&&!!date) {
@@ -85,7 +96,7 @@ class Book extends Component {
     }
     /* If edited book has been submited to state, load book info from state, otherwise from props */
     return (
-      <div className="book">
+      <div className={`book ${deleteItem===true ? "no-width" : ""}`}>
         <Cover background={this.coverBackground(item.imageLink)} link={`${item.link}`} />
         <div className="divider"></div>
         <div className="info">
@@ -107,11 +118,14 @@ class Book extends Component {
             <img src={`${imagesPrefix}images/close.png`} />
           </div>
         </div>
+        <div className="delete" onClick={this.deleteBook.bind(this)}>
+          <img src={`${imagesPrefix}images/delete.png`} />
+        </div>
         <div className={`edit-form-container ${isDoneEditing===true ? "" : "on-top"}`}>
           <div className={`edit-form-inner ${isEditing===true ? "" : "edit-form-tranform"}`}>
           {
             isEditing &&
-            <Edit book={!!newBook ? newBook : item} isForAdd={false} submitBook={this.submitBook.bind(this)} cancelEdit={this.editToggle.bind(this)} />
+            <Edit book={!!newBook ? newBook : item} bookTitles={bookTitles} isForAdd={false} submitBook={this.submitBook.bind(this)} cancelEdit={this.editToggle.bind(this)} />
           }
           </div>
         </div>

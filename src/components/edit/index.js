@@ -44,10 +44,16 @@ class Edit extends Component {
 
   /* Checks if title, once all spaces were removed, is longer than 0 */
   titleValid() {
+    const { bookTitles } = this.props;
     const { title } = this.state;
     var validator = { isValid: false, text: "Title must contain at least one letter" };
-    if(!!title&&title.replace(/ /g,"").length > 0) {
-      validator = { isValid: true };
+    if(!!bookTitles&&!!bookTitles.includes(title)) {
+      validator.text = `There's already a book named ${title}`;
+    }
+    else {
+      if(!!title&&title.replace(/ /g,"").length > 0) {
+        validator = { isValid: true };
+      }
     }
     return validator;
   }

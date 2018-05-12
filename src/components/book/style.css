@@ -20,6 +20,7 @@ h6 {
   margin-bottom: 25px;
   background-color: rgba(255,255,255,.8);
   border-bottom: solid 2px rgb(230, 230, 230);
+  overflow: hidden;
 }
 
 .info {
@@ -35,18 +36,27 @@ h6 {
   border-color: rgb(237, 120, 74);
 }
 
-.edit {
-  background-color: rgba(255,255,255,0);
+.edit, .delete {
   cursor: pointer;
   position: absolute;
   top: 597px;
-  right: 0;
   width: 43px;
   height: 43px;
   padding: 8px;
-  border-left: solid 3px rgb(245, 233, 229);
-  border-top: solid 3px rgb(245, 233, 229);
+  border-left: solid 3px;
+  border-top: solid 3px;
   overflow: hidden;
+}
+
+.edit {
+  right: 0;
+  border-color: rgb(245, 233, 229);
+}
+
+.delete {
+  right: 43px;
+  background-color: rgb(209, 208, 208);
+  border-color: rgb(241, 234, 234);
 }
 
 .edit, .edit-form-inner {
@@ -57,7 +67,11 @@ h6 {
   background-color: rgba(237, 109, 58, 0.8);
 }
 
-.edit img {
+.delete:hover {
+  background-color: rgba(209, 208, 208, 0.8);
+}
+
+.edit img, .delete img {
   width: auto;
   height: 100%;
 }
@@ -94,4 +108,8 @@ h6 {
 
 .on-top {
   z-index: 3;
+}
+
+.no-width {
+  width: 0!important;
 }

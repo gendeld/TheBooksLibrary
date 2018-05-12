@@ -11,19 +11,28 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: []
+      books: [],
+      bookTitles: []
     };
   }
 
   async componentDidMount() {
     const books = await fetchBooks();
     if(!!books) {
-      this.setState({books});
+      const bookTitles = this.mapTitles(books);
+      this.setState({books, bookTitles});
     }
   }
 
   shouldComponentUpdate(nextProps,nextState) {
     return (JSON.stringify(nextState)!==JSON.stringify(this.state));
+  }
+
+  /* Return a list of book titles from a list of books */
+  mapTitles(books) {
+    return books.map((book) => {
+      return book.title;
+    });
   }
 
   /* Add new book to the start of the deck */
@@ -36,13 +45,30 @@ class App extends Component {
       author,
       date
     });
+    const newBookTitles = this.mapTitles(newBooks);
     this.setState({
-      books: newBooks
+      books: newBooks,
+      bookTitles: newBookTitles
     });
   }
 
+  removeBook(book) {
+    var array = [...this.state.books];
+    var i=0;
+    var flag=false;
+    while(!flag&&i<array.length) {
+      if(JSON.stringify(array[i])==JSON.stringify(book)) {
+        array.splice(i,1);
+        flag=true;
+      }
+      i++;
+    }
+    const newBookTitles = this.mapTitles(array);
+    this.setState({books: array, bookTitles: newBookTitles});
+  }
+
   render() {
-    const { books } = this.state;
+    const { books, bookTitles } = this.state;
     return (
       <div id="page">
         <Helmet>
@@ -59,10 +85,10 @@ class App extends Component {
         <Grid>
           {
             books.length>0 ?
-              books.map((book) => {
+              books.map((book, index) => {
                 return (
                   <Col xs={12} sm={6} lg={4} key={book.title+book.author}>
-                    <Book item={book} />
+                    <Book item={book} deleteFromArray={this.removeBook.bind(this)} bookTitles={bookTitles} />
                   </Col>
                 );
               })
