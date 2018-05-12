@@ -52,6 +52,7 @@ class App extends Component {
     });
   }
 
+  /* Removes a given book from state */
   removeBook(book) {
     var array = [...this.state.books];
     var i=0;
