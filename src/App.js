@@ -58,7 +58,7 @@ class App extends Component {
     var i=0;
     var flag=false;
     while(!flag&&i<array.length) {
-      if(JSON.stringify(array[i])==JSON.stringify(book)) {
+      if(JSON.stringify(array[i])===JSON.stringify(book)) {
         array.splice(i,1);
         flag=true;
       }
@@ -71,7 +71,7 @@ class App extends Component {
   render() {
     const { books, bookTitles } = this.state;
     return (
-      <div id="page">
+      <div id="page" style={{backgroundImage: `url(${window.location.origin}/images/tic-tac-toe.png)`}}>
         <Helmet>
           <meta charSet="utf-8" />
           <title>The Books Library</title>

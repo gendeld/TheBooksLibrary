@@ -3,7 +3,7 @@ import Cover from '../cover';
 import Edit from '../edit';
 import './style.css';
 
-const imagesPrefix = "http://127.0.0.1:8080/";
+const imagesPrefix = window.location.origin+"/";
 
 /* Book view */
 class Book extends Component {

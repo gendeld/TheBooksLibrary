@@ -1,6 +1,6 @@
 export const fetchBooks = () => {
   return new Promise((resolve,reject) => {
-    fetch('http://127.0.0.1:8080/books.json', {
+    fetch('https://api.myjson.com/bins/134o9q', {
       mode: 'cors'
     })
     .then(async(response) => {
